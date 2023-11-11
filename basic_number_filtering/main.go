@@ -8,11 +8,27 @@ func Hello() string {
 
 func main() {
 	fmt.Println(Hello())
+
+	tt := BoolFilterList([]int{0, 1, 2, 3}, IsEven)
+	fmt.Println(tt)
 }
 
-func IsEven(x int) bool {
+func IsEven(x int) (int, bool) {
 	res := float64(x) / 2
 	// we divide the number by 2.
 	// if the quotient is a fraction, then the number is not an integer
-	return res == float64(int(res))
+	if res == float64(int(res)) {
+		return x, true
+	}
+	return 0, false
+}
+
+func BoolFilterList(in []int, filterFunc func(x int) (int, bool)) []int {
+	out := []int{}
+	for _, v := range in {
+		if val, ok := filterFunc(v); ok {
+			out = append(out, val)
+		}
+	}
+	return out
 }

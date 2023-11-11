@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -31,8 +32,37 @@ func TestIsEven(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := IsEven(tt.args.x); got != tt.want {
+			got, ok := IsEven(tt.args.x)
+			if (got != tt.args.x) && (ok != tt.want) {
 				t.Errorf("IsEven() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func doNothing(x int) (int, bool) {
+	return x, true
+}
+
+func TestBoolFilterList(t *testing.T) {
+	type args struct {
+		in         []int
+		filterFunc func(x int) (int, bool)
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"Filter nothing", args{[]int{0, 1, 2, 3}, doNothing}, []int{0, 1, 2, 3}},
+		{"Filter Even", args{[]int{0, 1, 2, 3}, IsEven}, []int{0, 2}},
+		{"Empty List", args{[]int{}, IsEven}, []int{}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := BoolFilterList(tt.args.in, tt.args.filterFunc); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("BoolFilterList() = %v, want %v", got, tt.want)
 			}
 		})
 	}
