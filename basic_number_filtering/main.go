@@ -32,3 +32,10 @@ func BoolFilterList(in []int, filterFunc func(x int) (int, bool)) []int {
 	}
 	return out
 }
+
+func IsOdd(x int) (int, bool) {
+	if _, ok := IsEven(x); ok {
+		return 0, false
+	}
+	return x, true
+}

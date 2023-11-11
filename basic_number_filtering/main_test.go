@@ -58,6 +58,7 @@ func TestBoolFilterList(t *testing.T) {
 		{"Filter nothing", args{[]int{0, 1, 2, 3}, doNothing}, []int{0, 1, 2, 3}},
 		{"Filter Even", args{[]int{0, 1, 2, 3}, IsEven}, []int{0, 2}},
 		{"Empty List", args{[]int{}, IsEven}, []int{}},
+		{"Filter Odd", args{[]int{0, 1, 2, 3}, IsOdd}, []int{1, 3}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
