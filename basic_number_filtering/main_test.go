@@ -203,3 +203,52 @@ func TestOddPrimeFilter(t *testing.T) {
 		})
 	}
 }
+
+func TestMultipleOf(t *testing.T) {
+	type args struct {
+		in int
+		x  int
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  int
+		want1 bool
+	}{
+		// TODO: Add test cases.
+		{"basic yes", args{20, 5}, 20, true},
+		{"basic no", args{5, 4}, 0, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, got1 := MultipleOf(tt.args.in, tt.args.x)
+			if got != tt.want {
+				t.Errorf("MultipleOf() got = %v, want %v", got, tt.want)
+			}
+			if got1 != tt.want1 {
+				t.Errorf("MultipleOf() got1 = %v, want %v", got1, tt.want1)
+			}
+		})
+	}
+}
+
+func TestEvenAndMultipleOf5(t *testing.T) {
+	type args struct {
+		in []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"basic yes", args{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}, []int{10, 20}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := EvenAndMultipleOf5(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("EvenAndMultipleOf5() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
