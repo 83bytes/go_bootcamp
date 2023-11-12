@@ -182,3 +182,24 @@ func TestPrimeFilter(t *testing.T) {
 		})
 	}
 }
+
+func TestOddPrimeFilter(t *testing.T) {
+	type args struct {
+		in []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"Filter Prime", args{[]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}}, []int{3, 5, 7}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := OddPrimeFilter(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("OddPrimeFilter() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

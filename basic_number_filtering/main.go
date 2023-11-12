@@ -70,3 +70,11 @@ func OddFilter(in []int) []int {
 func PrimeFilter(in []int) []int {
 	return BoolFilterList(in, IsPrime)
 }
+
+// story 4
+// we can either filter for odds first and then check for primes OR do the opposite
+// this choice depends on how much prime numbers we are expecting in the input list
+// AND what is the distribution of even/odd numbers.
+func OddPrimeFilter(in []int) []int {
+	return BoolFilterList(BoolFilterList(in, IsOdd), IsPrime)
+}
