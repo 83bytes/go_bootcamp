@@ -68,3 +68,54 @@ func TestBoolFilterList(t *testing.T) {
 		})
 	}
 }
+
+func TestIsOdd(t *testing.T) {
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		{"Three is odd!", args{3}, true},
+		{"Five is odd!", args{5}, true},
+		{"Six is odd!", args{6}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, ok := IsOdd(tt.args.x)
+			if (got != tt.args.x) && (ok != tt.want) {
+				t.Errorf("IsOdd() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIsPrime(t *testing.T) {
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  bool
+		want1 int
+	}{
+		// TODO: Add test cases.
+		{"1 is not prime!!", args{1}, false, 0},
+		{"8 is NOT prime!!", args{1}, false, 0},
+		{"7 is prime!!", args{7}, true, 7},
+		{"19 is prime!!", args{19}, true, 19},
+		{"18 is NOT prime!!", args{18}, false, 18},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got1, got := IsPrime(tt.args.x)
+			if (got != tt.want) && (got1 != tt.want1) {
+				t.Errorf("IsPrime() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

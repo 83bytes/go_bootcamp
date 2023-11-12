@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/big"
+)
 
 func Hello() string {
 	return "Hello, world!!"
@@ -8,9 +11,6 @@ func Hello() string {
 
 func main() {
 	fmt.Println(Hello())
-
-	tt := BoolFilterList([]int{0, 1, 2, 3}, IsEven)
-	fmt.Println(tt)
 }
 
 func IsEven(x int) (int, bool) {
@@ -38,4 +38,11 @@ func IsOdd(x int) (int, bool) {
 		return 0, false
 	}
 	return x, true
+}
+
+func IsPrime(x int) (int, bool) {
+	if big.NewInt(int64(x)).ProbablyPrime(0) {
+		return x, true
+	}
+	return 0, false
 }
