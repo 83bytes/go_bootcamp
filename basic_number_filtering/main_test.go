@@ -119,3 +119,66 @@ func TestIsPrime(t *testing.T) {
 		})
 	}
 }
+
+func TestEvenFilter(t *testing.T) {
+	type args struct {
+		in []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"Filter even nos 1", args{[]int{0, 1, 2, 3, 4}}, []int{0, 2, 4}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := EvenFilter(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("EvenFilter() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestOddFilter(t *testing.T) {
+	type args struct {
+		in []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"Filter odd", args{[]int{0, 1, 2, 3, 4}}, []int{1, 3}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := OddFilter(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("OddFilter() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestPrimeFilter(t *testing.T) {
+	type args struct {
+		in []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"Filter Prime", args{[]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}}, []int{2, 3, 5, 7}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := PrimeFilter(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("PrimeFilter() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
