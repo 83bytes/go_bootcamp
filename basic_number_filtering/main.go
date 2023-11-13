@@ -63,18 +63,16 @@ func IsPrime(x int) (int, bool) {
 	return 0, false
 }
 
-// Takes 2 ints and tells if the first one is a multiple of the other or not
-func MultipleOf(in int, x int) (int, bool) {
-	r := float64(in) / float64(x)
-	if checkInteger(r) {
-		return int(in), true
-	}
-	return int(0), false
-}
+// Takes 1 int and returns a function which
+func genMultipleOf(x int) func(int) (int, bool) {
+	return func(in int) (int, bool) {
+		r := float64(in) / float64(x)
 
-// uses the prev funciton to generate a filter-func that filters the multiple of 5
-func multipelOf5(in int) (int, bool) {
-	return MultipleOf(in, 5)
+		if checkInteger(r) {
+			return in, true
+		}
+		return 0, false
+	}
 }
 
 // greater than operator
@@ -113,21 +111,9 @@ func OddPrimeFilter(in []int) []int {
 // filter: even + multiple of 5
 
 func EvenAndMultipleOf5(in []int) []int {
-	return BoolFilterList(BoolFilterList(in, multipelOf5), IsEven)
-}
-
-// story 6
-// odd
-// multiple of 3
-// greater than 10
-func multipelOf3(in int) (int, bool) {
-	return MultipleOf(in, 3)
-}
-
-func greaterthan3(x int) (int, bool) {
-	return genGreaterThan(3)(x)
+	return BoolFilterList(BoolFilterList(in, genMultipleOf(5)), IsEven)
 }
 
 func story6(in []int) []int {
-	return BoolFilterList(BoolFilterList(BoolFilterList(in, IsOdd), multipelOf3), genGreaterThan(10))
+	return BoolFilterList(BoolFilterList(BoolFilterList(in, IsOdd), genMultipleOf(3)), genGreaterThan(10))
 }

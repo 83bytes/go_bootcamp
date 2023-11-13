@@ -204,29 +204,28 @@ func TestOddPrimeFilter(t *testing.T) {
 	}
 }
 
-func TestMultipleOf(t *testing.T) {
+func Test_genMultipleOf(t *testing.T) {
 	type args struct {
-		in int
-		x  int
+		x int
 	}
 	tests := []struct {
 		name  string
 		args  args
+		in    int
 		want  int
 		want1 bool
 	}{
 		// TODO: Add test cases.
-		{"basic yes", args{20, 5}, 20, true},
-		{"basic no", args{5, 4}, 0, false},
+		{"basic multiple of 5 (positive)", args{5}, 20, 20, true},
+		{"basic multiple of 5 (negetive)", args{5}, 21, 0, false},
+		{"basic multiple of 3 (positive)", args{3}, 18, 18, true},
+		{"basic multiple of 3 (negetive)", args{3}, 20, 0, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := MultipleOf(tt.args.in, tt.args.x)
-			if got != tt.want {
-				t.Errorf("MultipleOf() got = %v, want %v", got, tt.want)
-			}
-			if got1 != tt.want1 {
-				t.Errorf("MultipleOf() got1 = %v, want %v", got1, tt.want1)
+			got, got1 := genMultipleOf(tt.args.x)(tt.in)
+			if got != tt.want && got1 != tt.want1 {
+				t.Errorf("genMultipleOf() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -269,33 +268,6 @@ func Test_story6(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := story6(tt.args.in); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("story6() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func Test_greaterthan3(t *testing.T) {
-	type args struct {
-		x int
-	}
-	tests := []struct {
-		name  string
-		args  args
-		want  int
-		want1 bool
-	}{
-		// TODO: Add test cases.
-		{"basic negetive", args{2}, 0, false},
-		{"basic positive", args{5}, 5, true},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := greaterthan3(tt.args.x)
-			if got != tt.want {
-				t.Errorf("greaterthan3() got = %v, want %v", got, tt.want)
-			}
-			if got1 != tt.want1 {
-				t.Errorf("greaterthan3() got1 = %v, want %v", got1, tt.want1)
 			}
 		})
 	}
