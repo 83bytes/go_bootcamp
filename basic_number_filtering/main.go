@@ -77,6 +77,16 @@ func multipelOf5(in int) (int, bool) {
 	return MultipleOf(in, 5)
 }
 
+// greater than operator
+func genGreaterThan(x int) func(int) (int, bool) {
+	return func(in int) (int, bool) {
+		if in > x {
+			return in, true
+		}
+		return 0, false
+	}
+}
+
 // functions that use the above to compose the solution like asked for in the notion doc
 
 func EvenFilter(in []int) []int {
@@ -104,4 +114,20 @@ func OddPrimeFilter(in []int) []int {
 
 func EvenAndMultipleOf5(in []int) []int {
 	return BoolFilterList(BoolFilterList(in, multipelOf5), IsEven)
+}
+
+// story 6
+// odd
+// multiple of 3
+// greater than 10
+func multipelOf3(in int) (int, bool) {
+	return MultipleOf(in, 3)
+}
+
+func greaterthan3(x int) (int, bool) {
+	return genGreaterThan(3)(x)
+}
+
+func story6(in []int) []int {
+	return BoolFilterList(BoolFilterList(BoolFilterList(in, IsOdd), multipelOf3), genGreaterThan(10))
 }

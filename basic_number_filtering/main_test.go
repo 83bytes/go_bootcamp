@@ -252,3 +252,51 @@ func TestEvenAndMultipleOf5(t *testing.T) {
 		})
 	}
 }
+
+func Test_story6(t *testing.T) {
+	type args struct {
+		in []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		// TODO: Add test cases.
+		{"basic yes", args{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}}, []int{15}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := story6(tt.args.in); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("story6() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_greaterthan3(t *testing.T) {
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name  string
+		args  args
+		want  int
+		want1 bool
+	}{
+		// TODO: Add test cases.
+		{"basic negetive", args{2}, 0, false},
+		{"basic positive", args{5}, 5, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, got1 := greaterthan3(tt.args.x)
+			if got != tt.want {
+				t.Errorf("greaterthan3() got = %v, want %v", got, tt.want)
+			}
+			if got1 != tt.want1 {
+				t.Errorf("greaterthan3() got1 = %v, want %v", got1, tt.want1)
+			}
+		})
+	}
+}
